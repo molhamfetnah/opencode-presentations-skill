@@ -1,0 +1,28 @@
+/* Style 12: Paper Cutout */
+section {
+  background: #f5f5dc;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border-radius: 0;
+}
+section.lead {
+  background: #fff;
+  transform: rotate(-1deg);
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+}
+section h1 {
+  color: #333;
+  font-family: 'Comic Sans MS', cursive;
+  background: #fff;
+  padding: 20px;
+  display: inline-block;
+  transform: rotate(2deg);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+}
+section li {
+  color: #444;
+  background: #fff;
+  padding: 15px 20px;
+  margin: 10px 0;
+  transform: rotate(-0.5deg);
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+}

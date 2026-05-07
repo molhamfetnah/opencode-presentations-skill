@@ -1,0 +1,24 @@
+/* Style 13: Watercolor */
+section {
+  background: linear-gradient(135deg, rgba(255,182,193,0.3) 0%, rgba(135,206,250,0.3) 100%);
+}
+section.lead {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+section h1 {
+  color: #5a5a8f;
+  font-family: 'Palatino', serif;
+  font-style: italic;
+}
+section h2 {
+  color: #7a6f9f;
+  font-family: 'Palatino', serif;
+}
+section li {
+  color: #5a5a8f;
+  background: rgba(255,255,255,0.6);
+  padding: 15px 25px;
+  border-radius: 20px;
+  margin: 12px 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}

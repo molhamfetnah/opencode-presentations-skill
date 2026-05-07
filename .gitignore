@@ -1,4 +1,6 @@
 node_modules/
-*.html
 *.pdf
 .DS_Store
+!presentations/components/*.html
+generated-*.png
+scraped-*.json

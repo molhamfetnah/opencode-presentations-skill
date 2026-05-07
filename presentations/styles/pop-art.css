@@ -1,0 +1,27 @@
+/* Style 15: Pop Art */
+section {
+  background: #fff000;
+  border: 8px solid #000;
+}
+section.lead {
+  background: linear-gradient(135deg, #ff0000 0%, #ffff00 50%, #0000ff 100%);
+}
+section h1 {
+  color: #0000ff;
+  font-family: 'Comic Sans MS', cursive;
+  font-weight: bold;
+  text-shadow: 4px 4px 0 #ff0000;
+  -webkit-text-stroke: 2px #000;
+}
+section h2 {
+  color: #ff0000;
+  font-family: 'Arial Black', sans-serif;
+}
+section li {
+  color: #000;
+  background: #fff;
+  padding: 20px;
+  margin: 15px 0;
+  border: 4px solid #000;
+  font-family: 'Comic Sans MS', cursive;
+}

@@ -1,0 +1,24 @@
+/* Style 04: Isometric */
+section {
+  background: linear-gradient(135deg, #2c3e50 0%, #4a5568 100%);
+  transform: rotateX(5deg);
+  perspective: 1000px;
+}
+section.lead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: rotateX(0deg);
+}
+section h1, section h2 {
+  color: #fff;
+  transform: rotateX(-5deg);
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+section li {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  margin: 15px 0;
+  transform: rotateX(-5deg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-left: 4px solid #667eea;
+}

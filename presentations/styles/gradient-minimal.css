@@ -1,0 +1,24 @@
+/* Style 03: Gradient Minimal */
+section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+section.lead {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+section h1 {
+  color: #fff;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+section h2 {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+}
+section li {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px 25px;
+  border-radius: 30px;
+  margin: 12px 0;
+  backdrop-filter: blur(10px);
+}

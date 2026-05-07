@@ -1,0 +1,28 @@
+/* Style 11: Geometric */
+section {
+  background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
+}
+section.lead {
+  background: #1a1a2e;
+}
+section h1 {
+  color: #fff;
+  position: relative;
+}
+section h1::before {
+  content: '▲';
+  position: absolute;
+  left: -50px;
+  color: rgba(255,255,255,0.3);
+  font-size: 2em;
+}
+section h2 {
+  color: rgba(255, 255, 255, 0.9);
+}
+section li {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  margin: 15px 0;
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+}

@@ -1,0 +1,30 @@
+/* Style 02: Neon Cyber */
+section {
+  background: #0a0a0f;
+  border: 2px solid #0ff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 60px rgba(0, 255, 255, 0.05);
+}
+section.lead {
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 100%);
+  box-shadow: 0 0 60px rgba(0, 255, 255, 0.4);
+}
+section h1, section h2 {
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff, 0 0 30px #0ff;
+  font-family: 'Courier New', monospace;
+}
+section li {
+  color: #f0f;
+  text-shadow: 0 0 5px #f0f;
+  border-left: 3px solid #0ff;
+  padding-left: 15px;
+}
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0ff, transparent);
+}

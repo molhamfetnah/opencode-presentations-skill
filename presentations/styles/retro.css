@@ -1,0 +1,29 @@
+/* Style 14: Retro */
+section {
+  background: #f0e68c;
+  background-image: 
+    linear-gradient(90deg, transparent 50%, rgba(0,0,0,0.05) 50%),
+    linear-gradient(transparent 50%, rgba(0,0,0,0.05) 50%);
+  background-size: 20px 20px;
+}
+section.lead {
+  background: #8b4513;
+}
+section h1 {
+  color: #8b4513;
+  font-family: 'Impact', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+}
+section h2 {
+  color: #654321;
+  font-family: 'Georgia', serif;
+}
+section li {
+  color: #333;
+  background: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border: 2px solid #8b4513;
+}

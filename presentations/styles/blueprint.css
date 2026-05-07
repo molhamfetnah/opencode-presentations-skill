@@ -1,0 +1,25 @@
+/* Style 17: Blueprint */
+section {
+  background: #003366;
+  background-image: 
+    linear-gradient(white 1px, transparent 1px),
+    linear-gradient(90deg, white 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+section.lead {
+  background: #004080;
+  border: 3px solid #fff;
+}
+section h1, section h2 {
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+section li {
+  color: #cce5ff;
+  background: rgba(0, 51, 102, 0.8);
+  padding: 15px 20px;
+  margin: 12px 0;
+  border: 1px solid #fff;
+}

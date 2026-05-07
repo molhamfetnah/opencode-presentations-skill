@@ -1,11 +1,11 @@
 ---
 marp: true
 theme: default
-class: lead
+size: 16:9
 paginate: true
 ---
 
-# Presentation Title
+# {title}
 
 ## Subtitle
 

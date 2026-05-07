@@ -1,16 +1,17 @@
 ---
 marp: true
 theme: default
+size: 16:9
 class: lead
 paginate: true
 style: |
+  section {
+    background: #f8f9fa;
+  }
   section.lead {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  }
-  section {
-    background: #f8f9fa;
   }
   section h1, section h2 {
     color: #2c3e50;
@@ -20,7 +21,7 @@ style: |
   }
 ---
 
-# Presentation Title
+# {title}
 
 ## Engaging Subtitle
 

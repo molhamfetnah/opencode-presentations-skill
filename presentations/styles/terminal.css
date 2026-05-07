@@ -1,0 +1,27 @@
+/* Style 16: Terminal */
+section {
+  background: #0d1117;
+  font-family: 'Courier New', monospace;
+}
+section.lead {
+  background: #161b22;
+  border-left: 4px solid #58a6ff;
+}
+section h1, section h2 {
+  color: #58a6ff;
+}
+section h1::before {
+  content: '$ ';
+  color: #3fb950;
+}
+section li {
+  color: #c9d1d9;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border-left: 2px solid #238636;
+}
+section li::before {
+  content: '>';
+  color: #3fb950;
+  margin-right: 15px;
+}

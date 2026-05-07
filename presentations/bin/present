@@ -3,37 +3,78 @@
 import { execSync } from 'child_process';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import { readFileSync, readdirSync, writeFileSync } from 'fs';
+import { readFileSync, readdirSync, writeFileSync, existsSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const templatesDir = join(__dirname, '..', 'templates');
+const stylesDir = join(__dirname, '..', 'styles');
 const opencodeDir = join(__dirname, '..', '..');
 const marpBin = join(opencodeDir, 'node_modules', '.bin', 'marp');
+
+const SLIDE_SIZES = {
+  '16:9': { width: 1920, height: 1080 },
+  '4:3': { width: 1440, height: 1080 },
+  '1:1': { width: 1080, height: 1080 },
+  '9:16': { width: 1080, height: 1920 },
+  '21:9': { width: 2560, height: 1080 }
+};
+
+const AVAILABLE_STYLES = [
+  'glassmorphism', 'neon-cyber', 'gradient-minimal', 'isometric', 'brutalist',
+  'corporate-blue', 'executive-dark', 'clean-white', 'editorial', 'academic',
+  'geometric', 'paper-cutout', 'watercolor', 'retro', 'pop-art',
+  'terminal', 'blueprint', 'data-viz', 'dev-tools', 'saas-dashboard'
+];
 
 const commands = {
   create: (args) => {
     const title = args[0];
     const theme = args.includes('--theme=modern') ? 'modern' : 'professional';
+    const style = extractArg(args, '--style=') || 'default';
+    const size = extractArg(args, '--size=') || '16:9';
+    
     const templateFile = join(templatesDir, `${theme}.md`);
     const template = readFileSync(templateFile, 'utf-8');
-    const content = template.replace('{title}', title);
+    
+    let content = template.replace('{title}', title);
+    
+    const sizeConfig = SLIDE_SIZES[size] || SLIDE_SIZES['16:9'];
+    content = content.replace('size: 16:9', `size: ${size}`);
+    
+    if (style !== 'default' && existsSync(join(stylesDir, `${style}.css`))) {
+      const styleCSS = readFileSync(join(stylesDir, `${style}.css`), 'utf-8');
+      content = content.replace('---', `---\nstyle: |\n${styleCSS}\n---`);
+    }
+    
     const filename = title.toLowerCase().replace(/\s+/g, '-') + '.md';
     writeFileSync(filename, content);
     console.log(`Created: ${filename}`);
+    console.log(`  Style: ${style}`);
+    console.log(`  Size: ${size}`);
   },
+  
   build: (args) => {
     const input = args[0];
     const output = input.replace('.md', '.html');
     execSync(`${marpBin} ${input} -o ${output}`, { stdio: 'inherit' });
     console.log(`Built: ${output}`);
   },
+  
   serve: (args) => {
     const input = args[0];
-    const port = args.includes('--port=') ? args.find(a => a.startsWith('--port=')).split('=')[1] : '8080';
+    const port = extractArg(args, '--port=') || '8080';
     console.log(`Serving at http://localhost:${port}`);
     execSync(`${marpBin} ${input} -s --port ${port}`, { stdio: 'inherit' });
   },
+  
+  preview: async (args) => {
+    const input = args[0];
+    const port = extractArg(args, '--port=') || '3000';
+    const { previewServer } = await import('../lib/preview-server.js');
+    previewServer(input, port);
+  },
+  
   'ai-generate': (args) => {
     const topic = args.join(' ');
     console.log(`AI Generation Guidance for: ${topic}`);
@@ -41,9 +82,12 @@ const commands = {
     console.log('1. Define the presentation goal and audience');
     console.log('2. Break the topic into key sections');
     console.log('3. Create bullet points for each slide');
-    console.log('4. Use --theme=professional or --theme=modern when creating');
-    console.log('5. Refine content with your AI assistant');
+    console.log('4. Choose from 20 design styles:');
+    AVAILABLE_STYLES.forEach((s, i) => console.log(`   ${String(i + 1).padStart(2, '0')}. ${s}`));
+    console.log('5. Use --style=<name> when creating');
+    console.log('6. Refine content with your AI assistant');
   },
+  
   list: () => {
     const files = readdirSync('.').filter(f => f.endsWith('.md'));
     if (files.length === 0) {
@@ -51,25 +95,138 @@ const commands = {
     } else {
       files.forEach(f => console.log(f));
     }
+  },
+  
+  styles: () => {
+    console.log('Available Design Styles (20 total):\n');
+    console.log('MODERN:');
+    AVAILABLE_STYLES.slice(0, 5).forEach((s, i) => console.log(`  ${String(i + 1).padStart(2, '0')}. ${s}`));
+    console.log('\nPROFESSIONAL:');
+    AVAILABLE_STYLES.slice(5, 10).forEach((s, i) => console.log(`  ${String(i + 6).padStart(2, '0')}. ${s}`));
+    console.log('\nCREATIVE:');
+    AVAILABLE_STYLES.slice(10, 15).forEach((s, i) => console.log(`  ${String(i + 11).padStart(2, '0')}. ${s}`));
+    console.log('\nTECH:');
+    AVAILABLE_STYLES.slice(15, 20).forEach((s, i) => console.log(`  ${String(i + 16).padStart(2, '0')}. ${s}`));
+  },
+  
+  sizes: () => {
+    console.log('Available Slide Sizes:\n');
+    Object.entries(SLIDE_SIZES).forEach(([name, dims]) => {
+      console.log(`  ${name.padEnd(6)} — ${dims.width}x${dims.height}`);
+    });
+  },
+  
+  chart: (args) => {
+    const type = args[0];
+    const data = args.slice(1).join(' ');
+    console.log(`Chart template for: ${type}`);
+    console.log('');
+    console.log('```markdown');
+    console.log(`<!-- chart:${type} data="${data}" -->`);
+    console.log('```');
+    console.log('\nAvailable chart types: bar, line, pie, donut, area, radar');
+  },
+  
+  'scrape-styles': (args) => {
+    const source = args[0] || 'dribbble';
+    const count = parseInt(extractArg(args, '--count=') || '10');
+    const output = extractArg(args, '--output=') || 'scraped-styles.json';
+    
+    console.log(`Scraping ${count} styles from ${source}...`);
+    scrapeStyles(source, count, output);
+  },
+  
+  'ai-image': (args) => {
+    const prompt = args.join(' ');
+    const output = extractArg(args, '--output=') || 'generated-image.png';
+    
+    console.log(`Generating AI image: "${prompt}"...`);
+    generateAIImage(prompt, output);
+  },
+  
+  carousel: (args) => {
+    const type = extractArg(args, '--type=') || 'coverflow';
+    console.log(`Carousel template: ${type}`);
+    console.log('');
+    console.log('```markdown');
+    console.log(`<!-- carousel:${type} items="5" -->`);
+    console.log('## Slide 1');
+    console.log('![image1](url1)');
+    console.log('## Slide 2');
+    console.log('![image2](url2)');
+    console.log('...');
+    console.log('<!-- /carousel -->');
+    console.log('```');
+    console.log('\nAvailable types: coverflow, cardstack, parallax, timeline, horizontal');
+  },
+  
+export: (args) => {
+    const input = args[0];
+    const format = extractArg(args, '--format=') || 'html';
+    
+    console.log(`Exporting ${input} to ${format}...`);
+    if (format === 'html') {
+      execSync(`${marpBin} ${input} -o ${input.replace('.md', '.html')}`, { stdio: 'inherit' });
+    } else if (format === 'pdf') {
+      execSync(`${marpBin} ${input} -o ${input.replace('.md', '.pdf')} --pdf`, { stdio: 'inherit' });
+    }
+    console.log('Export complete!');
   }
 };
+
+async function scrapeStyles(source, count, output) {
+  try {
+    const { scrapeDesigns } = await import('../lib/scraper.js');
+    const styles = await scrapeDesigns(source, count);
+    writeFileSync(output, JSON.stringify(styles, null, 2));
+    console.log(`Saved ${styles.length} styles to ${output}`);
+  } catch (e) {
+    console.log('Note: Web scraping requires puppeteer. Run: npm install puppeteer');
+    console.log('Scraping skipped.');
+  }
+}
+
+async function generateAIImage(prompt, output) {
+  try {
+    const { generateImage } = await import('../lib/ai-image.js');
+    const result = await generateImage(prompt, output);
+    if (result) console.log(`Image saved to: ${result}`);
+  } catch (e) {
+    console.log('Image generation failed:', e.message);
+  }
+}
+
+function extractArg(args, prefix) {
+  const arg = args.find(a => a.startsWith(prefix));
+  return arg ? arg.split('=')[1] : null;
+}
 
 const command = process.argv[2];
 const args = process.argv.slice(3);
 
 if (!command) {
   console.log('Usage: present <command> [options]');
+  console.log('');
   console.log('Commands:');
-  console.log('  create <title> [--theme=professional|modern]');
+  console.log('  create <title> [--theme=professional|modern] [--style=<name>] [--size=16:9]');
   console.log('  build <file.md>');
-  console.log('  serve <file.md>');
+  console.log('  serve <file.md> [--port=8080]');
+  console.log('  preview <file.md> [--port=3000]  # Live preview with hot reload');
   console.log('  ai-generate <topic>');
   console.log('  list');
+  console.log('  styles         # List available design styles');
+  console.log('  sizes          # List available slide sizes');
+  console.log('  chart <type> [data]  # Generate chart template');
+  console.log('  carousel --type=<type>  # Generate carousel template');
+  console.log('  scrape-styles <source> [--count=10] [--output=file.json]');
+  console.log('  ai-image "prompt" [--output=image.png]');
+  console.log('  export <file.md> --format=html|pdf');
   process.exit(1);
 }
 
 if (!commands[command]) {
   console.error(`Unknown command: ${command}`);
+  console.error('Run "present" without args to see available commands.');
   process.exit(1);
 }
 

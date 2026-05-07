@@ -1,0 +1,27 @@
+/* Style 10: Academic */
+section {
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+}
+section.lead {
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+  border-bottom: 4px solid #343a40;
+}
+section h1 {
+  color: #212529;
+  font-family: 'Times New Roman', serif;
+  font-weight: bold;
+}
+section h2 {
+  color: #495057;
+  font-family: 'Times New Roman', serif;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 10px;
+}
+section li {
+  color: #212529;
+  font-family: 'Times New Roman', serif;
+  font-size: 1em;
+  line-height: 1.8;
+  padding: 8px 0;
+}
