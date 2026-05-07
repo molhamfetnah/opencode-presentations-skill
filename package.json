@@ -1,0 +1,15 @@
+{
+  "name": "@opencode/presentations",
+  "version": "1.0.0",
+  "description": "Marp-based presentation generator for OpenCode",
+  "type": "module",
+  "bin": {
+    "present": "./presentations/bin/present"
+  },
+  "dependencies": {
+    "@marp-team/marp-cli": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

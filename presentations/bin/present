@@ -1,0 +1,79 @@
+#!/usr/bin/env node
+
+import { execSync } from 'child_process';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { readFileSync, readdirSync, writeFileSync } from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const templatesDir = join(__dirname, '..', 'templates');
+
+const commands = {
+  create: (args) => {
+    const title = args[0];
+    const theme = args.includes('--theme=modern') ? 'modern' : 'professional';
+    const templateFile = join(templatesDir, `${theme}.md`);
+    const template = readFileSync(templateFile, 'utf-8');
+    const content = template.replace('{title}', title);
+    const filename = title.toLowerCase().replace(/\s+/g, '-') + '.md';
+    writeFileSync(filename, content);
+    console.log(`Created: ${filename}`);
+  },
+  build: (args) => {
+    const input = args[0];
+    const output = input.replace('.md', '.html');
+    execSync(`npx marp ${input} -o ${output}`, { stdio: 'inherit' });
+    console.log(`Built: ${output}`);
+  },
+  serve: (args) => {
+    const input = args[0];
+    const port = args.includes('--port=') ? args.find(a => a.startsWith('--port=')).split('=')[1] : '8080';
+    console.log(`Serving at http://localhost:${port}`);
+    execSync(`npx marp ${input} -s --port ${port}`, { stdio: 'inherit' });
+  },
+  'ai-generate': (args) => {
+    const topic = args.join(' ');
+    console.log(`AI Generation Guidance for: ${topic}`);
+    console.log('');
+    console.log('1. Define the presentation goal and audience');
+    console.log('2. Break the topic into key sections');
+    console.log('3. Create bullet points for each slide');
+    console.log('4. Use --theme=professional or --theme=modern when creating');
+    console.log('5. Refine content with your AI assistant');
+  },
+  list: () => {
+    const files = readdirSync('.').filter(f => f.endsWith('.md'));
+    if (files.length === 0) {
+      console.log('No .md files found in current directory');
+    } else {
+      files.forEach(f => console.log(f));
+    }
+  }
+};
+
+const command = process.argv[2];
+const args = process.argv.slice(3);
+
+if (!command) {
+  console.log('Usage: present <command> [options]');
+  console.log('Commands:');
+  console.log('  create <title> [--theme=professional|modern]');
+  console.log('  build <file.md>');
+  console.log('  serve <file.md>');
+  console.log('  ai-generate <topic>');
+  console.log('  list');
+  process.exit(1);
+}
+
+if (!commands[command]) {
+  console.error(`Unknown command: ${command}`);
+  process.exit(1);
+}
+
+try {
+  commands[command](args);
+} catch (error) {
+  console.error(`Error: ${error.message}`);
+  process.exit(1);
+}
