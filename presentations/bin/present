@@ -8,6 +8,8 @@ import { readFileSync, readdirSync, writeFileSync } from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const templatesDir = join(__dirname, '..', 'templates');
+const opencodeDir = join(__dirname, '..', '..');
+const marpBin = join(opencodeDir, 'node_modules', '.bin', 'marp');
 
 const commands = {
   create: (args) => {
@@ -23,14 +25,14 @@ const commands = {
   build: (args) => {
     const input = args[0];
     const output = input.replace('.md', '.html');
-    execSync(`npx marp ${input} -o ${output}`, { stdio: 'inherit' });
+    execSync(`${marpBin} ${input} -o ${output}`, { stdio: 'inherit' });
     console.log(`Built: ${output}`);
   },
   serve: (args) => {
     const input = args[0];
     const port = args.includes('--port=') ? args.find(a => a.startsWith('--port=')).split('=')[1] : '8080';
     console.log(`Serving at http://localhost:${port}`);
-    execSync(`npx marp ${input} -s --port ${port}`, { stdio: 'inherit' });
+    execSync(`${marpBin} ${input} -s --port ${port}`, { stdio: 'inherit' });
   },
   'ai-generate': (args) => {
     const topic = args.join(' ');
