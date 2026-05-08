@@ -1,0 +1,12 @@
+{
+  "name": "presentations-tests",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Test suite for OpenCode Presentations Plugin",
+  "scripts": {
+    "test": "node run-tests.js",
+    "stress": "node stress-test.js",
+    "full": "npm run test && npm run stress"
+  },
+  "keywords": ["test", "presentation", "marp", "opencode"]
+}
