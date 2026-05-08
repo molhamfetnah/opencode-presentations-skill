@@ -1,0 +1,129 @@
+{
+  "timestamp": "2026-05-08T15:44:16.709Z",
+  "nodeVersion": "v22.22.1",
+  "platform": "linux",
+  "cliPath": "/mnt/data/projects/opencode-presentations-skill/presentations/bin/present",
+  "tests": [
+    {
+      "name": "Help Command",
+      "success": true,
+      "duration": 126,
+      "output": "Present v2.0.0 - Marp-based presentation generator\n\nUsage: present <command> [options]\n\nCommands:\n  "
+    },
+    {
+      "name": "Version Command",
+      "success": true,
+      "duration": 128,
+      "output": "present v2.0.0"
+    },
+    {
+      "name": "List Styles",
+      "success": true,
+      "duration": 132,
+      "styleCount": 20
+    },
+    {
+      "name": "List Sizes",
+      "success": true,
+      "duration": 157,
+      "sizeCount": 5
+    },
+    {
+      "name": "Create Presentation",
+      "success": false,
+      "duration": 140,
+      "error": "File not created"
+    },
+    {
+      "name": "Create with Style",
+      "success": true,
+      "duration": 148,
+      "style": "neon-cyber"
+    },
+    {
+      "name": "Create with Size",
+      "success": true,
+      "duration": 141,
+      "size": "4:3"
+    },
+    {
+      "name": "List Command",
+      "success": true,
+      "duration": 131,
+      "files": "test-presentation.md"
+    },
+    {
+      "name": "Chart Template",
+      "success": true,
+      "duration": 123,
+      "chartType": "bar"
+    },
+    {
+      "name": "Carousel Template",
+      "success": true,
+      "duration": 118,
+      "carouselType": "coverflow"
+    },
+    {
+      "name": "Error: Missing Title",
+      "success": true,
+      "duration": 118,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Error: Invalid Style",
+      "success": false,
+      "duration": 121,
+      "error": "Should fail with invalid style"
+    },
+    {
+      "name": "Error: Invalid Size",
+      "success": true,
+      "duration": 117,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Error: Invalid Chart Type",
+      "success": true,
+      "duration": 129,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Error: Invalid Carousel Type",
+      "success": true,
+      "duration": 119,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Build Presentation",
+      "success": true,
+      "duration": 137,
+      "exitCode": 1,
+      "acceptable": true
+    },
+    {
+      "name": "AI Generate Guidance",
+      "success": true,
+      "duration": 125,
+      "topic": "Machine Learning"
+    },
+    {
+      "name": "All 20 Styles Available",
+      "success": true,
+      "duration": 134,
+      "styleCount": 20
+    },
+    {
+      "name": "All 5 Sizes Available",
+      "success": true,
+      "duration": 126,
+      "sizeCount": 5
+    },
+    {
+      "name": "Error: Unknown Command",
+      "success": true,
+      "duration": 122,
+      "expected": "non-zero exit code"
+    }
+  ]
+}

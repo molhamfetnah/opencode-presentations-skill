@@ -1,0 +1,129 @@
+{
+  "timestamp": "2026-05-08T15:43:22.176Z",
+  "nodeVersion": "v22.22.1",
+  "platform": "linux",
+  "cliPath": "/mnt/data/projects/presentations/bin/present",
+  "tests": [
+    {
+      "name": "Help Command",
+      "success": false,
+      "duration": 120,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "Version Command",
+      "success": false,
+      "duration": 109,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "List Styles",
+      "success": false,
+      "duration": 112,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "List Sizes",
+      "success": false,
+      "duration": 110,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "Create Presentation",
+      "success": false,
+      "duration": 112,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "Create with Style",
+      "success": false,
+      "duration": 113,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "Create with Size",
+      "success": false,
+      "duration": 112,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "List Command",
+      "success": false,
+      "duration": 119,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "Chart Template",
+      "success": false,
+      "duration": 119,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "Carousel Template",
+      "success": false,
+      "duration": 115,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "Error: Missing Title",
+      "success": false,
+      "duration": 155,
+      "error": "Missing error message: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "Error: Invalid Style",
+      "success": true,
+      "duration": 142,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Error: Invalid Size",
+      "success": true,
+      "duration": 134,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Error: Invalid Chart Type",
+      "success": true,
+      "duration": 124,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Error: Invalid Carousel Type",
+      "success": true,
+      "duration": 144,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Build Presentation",
+      "success": true,
+      "duration": 125,
+      "exitCode": 1,
+      "acceptable": true
+    },
+    {
+      "name": "AI Generate Guidance",
+      "success": false,
+      "duration": 119,
+      "error": "Exit code 1: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    },
+    {
+      "name": "All 20 Styles Available",
+      "success": false,
+      "duration": 134,
+      "error": "Missing style: glassmorphism"
+    },
+    {
+      "name": "All 5 Sizes Available",
+      "success": false,
+      "duration": 125,
+      "error": "Missing size: 16:9"
+    },
+    {
+      "name": "Error: Unknown Command",
+      "success": false,
+      "duration": 111,
+      "error": "Missing error message: node:internal/modules/cjs/loader:1386\n  throw err;\n  ^\n\nError: Cannot find module '/mnt/data/projects/presentations/bin/present'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1383:15)\n    at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)\n    at Module._load (node:internal/modules/cjs/loader:1192:37)\n    at TracingChannel.traceSync (node:diagnostics_channel:328:14)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)\n    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:36:49 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v22.22.1\n"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "timestamp": "2026-05-08T15:40:42.237Z",
+  "nodeVersion": "v22.22.1",
+  "platform": "linux",
+  "tests": [
+    {
+      "name": "Help Command",
+      "success": false,
+      "duration": 144,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "Version Command",
+      "success": false,
+      "duration": 131,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "List Styles",
+      "success": false,
+      "duration": 130,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "List Sizes",
+      "success": false,
+      "duration": 134,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "Create Presentation",
+      "success": false,
+      "duration": 134,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "Create with Style",
+      "success": false,
+      "duration": 165,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "Create with Size",
+      "success": false,
+      "duration": 142,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "List Command",
+      "success": false,
+      "duration": 116,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "Chart Template",
+      "success": false,
+      "duration": 110,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "Carousel Template",
+      "success": false,
+      "duration": 110,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "Error: Missing Title",
+      "success": false,
+      "duration": 122,
+      "error": "Missing error message"
+    },
+    {
+      "name": "Error: Invalid Style",
+      "success": true,
+      "duration": 134,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Error: Invalid Size",
+      "success": true,
+      "duration": 118,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Error: Invalid Chart Type",
+      "success": true,
+      "duration": 126,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Error: Invalid Carousel Type",
+      "success": true,
+      "duration": 123,
+      "expected": "non-zero exit code"
+    },
+    {
+      "name": "Build Presentation",
+      "success": true,
+      "duration": 125,
+      "exitCode": 1
+    },
+    {
+      "name": "AI Generate Guidance",
+      "success": false,
+      "duration": 128,
+      "error": "Exit code 1"
+    },
+    {
+      "name": "All 20 Styles Available",
+      "success": false,
+      "duration": 115,
+      "error": "Missing style: glassmorphism"
+    },
+    {
+      "name": "All 5 Sizes Available",
+      "success": false,
+      "duration": 121,
+      "error": "Missing size: 16:9"
+    },
+    {
+      "name": "Error: Unknown Command",
+      "success": false,
+      "duration": 131,
+      "error": "Missing error message"
+    }
+  ]
+}

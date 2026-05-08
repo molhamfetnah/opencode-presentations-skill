@@ -35,11 +35,12 @@ function extractArg(args, prefix) {
 }
 
 const commands = {
-  create: (args) => {
+  create: async (args) => {
     const title = args[0];
     if (!title) {
-      console.error('Error: Title is required');
-      process.exit(1);
+      const { runWizard } = await import('./wizard.js');
+      await runWizard();
+      return;
     }
     
     const theme = args.includes('--theme=modern') ? 'modern' : 'professional';
@@ -298,6 +299,11 @@ const commands = {
   
   version: () => {
     console.log(`present v${VERSION}`);
+  },
+  
+  wizard: async () => {
+    const { runWizard } = await import('./wizard.js');
+    await runWizard();
   }
 };
 
@@ -310,7 +316,8 @@ if (!command || command === 'help' || command === '--help' || command === '-h') 
   console.log('Usage: present <command> [options]');
   console.log('');
   console.log('Commands:');
-  console.log('  create <title>           Create new presentation');
+  console.log('  create [title]          Create new presentation (launches wizard if no title)');
+  console.log('  wizard                   Launch interactive wizard');
   console.log('  build <file.md>         Build HTML from markdown');
   console.log('  serve <file.md>         Serve presentation locally');
   console.log('  preview <file.md>       Live preview with hot reload');
