@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
 import { execSync } from 'child_process';
-import { dirname, join } from 'path';
+import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync, readdirSync, writeFileSync, existsSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const templatesDir = join(__dirname, '..', 'templates');
-const stylesDir = join(__dirname, '..', 'styles');
-const opencodeDir = join(__dirname, '..', '..');
-const marpBin = join(opencodeDir, 'node_modules', '.bin', 'marp');
+const ROOT_DIR = resolve(__dirname, '..', '..');
+const TEMPLATES_DIR = join(__dirname, '..', 'templates');
+const STYLES_DIR = join(__dirname, '..', 'styles');
+const MARP_BIN = join(ROOT_DIR, 'node_modules', '.bin', 'marp');
 
 const SLIDE_SIZES = {
   '16:9': { width: 1920, height: 1080 },
@@ -27,27 +27,51 @@ const AVAILABLE_STYLES = [
   'terminal', 'blueprint', 'data-viz', 'dev-tools', 'saas-dashboard'
 ];
 
+const VERSION = '2.0.0';
+
+function extractArg(args, prefix) {
+  const arg = args.find(a => a.startsWith(prefix));
+  return arg ? arg.split('=')[1] : null;
+}
+
 const commands = {
   create: (args) => {
     const title = args[0];
+    if (!title) {
+      console.error('Error: Title is required');
+      process.exit(1);
+    }
+    
     const theme = args.includes('--theme=modern') ? 'modern' : 'professional';
     const style = extractArg(args, '--style=') || 'default';
     const size = extractArg(args, '--size=') || '16:9';
     
-    const templateFile = join(templatesDir, `${theme}.md`);
-    const template = readFileSync(templateFile, 'utf-8');
-    
-    let content = template.replace('{title}', title);
-    
-    const sizeConfig = SLIDE_SIZES[size] || SLIDE_SIZES['16:9'];
-    content = content.replace('size: 16:9', `size: ${size}`);
-    
-    if (style !== 'default' && existsSync(join(stylesDir, `${style}.css`))) {
-      const styleCSS = readFileSync(join(stylesDir, `${style}.css`), 'utf-8');
-      content = content.replace('---', `---\nstyle: |\n${styleCSS}\n---`);
+    if (!SLIDE_SIZES[size]) {
+      console.error(`Error: Invalid size "${size}". Use: ${Object.keys(SLIDE_SIZES).join(', ')}`);
+      process.exit(1);
     }
     
-    const filename = title.toLowerCase().replace(/\s+/g, '-') + '.md';
+    const templateFile = join(TEMPLATES_DIR, `${theme}.md`);
+    if (!existsSync(templateFile)) {
+      console.error(`Error: Template not found: ${templateFile}`);
+      process.exit(1);
+    }
+    
+    const template = readFileSync(templateFile, 'utf-8');
+    let content = template.replace('{title}', title);
+    content = content.replace('size: 16:9', `size: ${size}`);
+    
+    if (style !== 'default') {
+      const styleFile = join(STYLES_DIR, `${style}.css`);
+      if (existsSync(styleFile)) {
+        const styleCSS = readFileSync(styleFile, 'utf-8');
+        content = content.replace('---', `---\nstyle: |\n${styleCSS}\n---`);
+      } else {
+        console.warn(`Warning: Style "${style}" not found, using default`);
+      }
+    }
+    
+    const filename = title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') + '.md';
     writeFileSync(filename, content);
     console.log(`Created: ${filename}`);
     console.log(`  Style: ${style}`);
@@ -56,29 +80,71 @@ const commands = {
   
   build: (args) => {
     const input = args[0];
+    if (!input) {
+      console.error('Error: Input file required');
+      process.exit(1);
+    }
+    if (!existsSync(input)) {
+      console.error(`Error: File not found: ${input}`);
+      process.exit(1);
+    }
+    if (!existsSync(MARP_BIN)) {
+      console.error('Error: Marp not found. Run: npm install');
+      process.exit(1);
+    }
+    
     const output = input.replace('.md', '.html');
-    execSync(`${marpBin} ${input} -o ${output}`, { stdio: 'inherit' });
+    console.log(`Building ${input}...`);
+    execSync(`${MARP_BIN} ${input} -o ${output}`, { stdio: 'inherit' });
     console.log(`Built: ${output}`);
   },
   
   serve: (args) => {
     const input = args[0];
+    if (!input) {
+      console.error('Error: Input file required');
+      process.exit(1);
+    }
+    if (!existsSync(input)) {
+      console.error(`Error: File not found: ${input}`);
+      process.exit(1);
+    }
+    
     const port = extractArg(args, '--port=') || '8080';
     console.log(`Serving at http://localhost:${port}`);
-    execSync(`${marpBin} ${input} -s --port ${port}`, { stdio: 'inherit' });
+    execSync(`${MARP_BIN} ${input} -s --port ${port}`, { stdio: 'inherit' });
   },
   
   preview: async (args) => {
     const input = args[0];
+    if (!input) {
+      console.error('Error: Input file required');
+      process.exit(1);
+    }
+    if (!existsSync(input)) {
+      console.error(`Error: File not found: ${input}`);
+      process.exit(1);
+    }
+    
     const port = extractArg(args, '--port=') || '3000';
-    const { previewServer } = await import('../lib/preview-server.js');
-    previewServer(input, port);
+    try {
+      const { previewServer } = await import('../lib/preview-server.js');
+      previewServer(input, port);
+    } catch (e) {
+      console.error('Error: Live preview requires dependencies');
+      console.error('Run: npm install express ws chokidar');
+      process.exit(1);
+    }
   },
   
   'ai-generate': (args) => {
     const topic = args.join(' ');
-    console.log(`AI Generation Guidance for: ${topic}`);
-    console.log('');
+    if (!topic) {
+      console.error('Error: Topic required');
+      process.exit(1);
+    }
+    
+    console.log(`AI Generation Guidance for: ${topic}\n`);
     console.log('1. Define the presentation goal and audience');
     console.log('2. Break the topic into key sections');
     console.log('3. Create bullet points for each slide');
@@ -119,33 +185,76 @@ const commands = {
   chart: (args) => {
     const type = args[0];
     const data = args.slice(1).join(' ');
+    
+    const validTypes = ['bar', 'line', 'pie', 'donut', 'area', 'radar', 'gauge'];
+    if (!type || !validTypes.includes(type)) {
+      console.error(`Error: Invalid chart type. Use: ${validTypes.join(', ')}`);
+      process.exit(1);
+    }
+    
     console.log(`Chart template for: ${type}`);
     console.log('');
     console.log('```markdown');
-    console.log(`<!-- chart:${type} data="${data}" -->`);
+    console.log(`<!-- chart:${type} data="${data || 'label:value,label2:value2'}" -->`);
     console.log('```');
-    console.log('\nAvailable chart types: bar, line, pie, donut, area, radar');
+    console.log('\nAvailable chart types:', validTypes.join(', '));
   },
   
-  'scrape-styles': (args) => {
+  'scrape-styles': async (args) => {
     const source = args[0] || 'dribbble';
-    const count = parseInt(extractArg(args, '--count=') || '10');
+    const count = parseInt(extractArg(args, '--count=') || '10', 10);
     const output = extractArg(args, '--output=') || 'scraped-styles.json';
     
+    const validSources = ['dribbble', 'behance', 'awwwards'];
+    if (!validSources.includes(source)) {
+      console.error(`Error: Invalid source. Use: ${validSources.join(', ')}`);
+      process.exit(1);
+    }
+    
     console.log(`Scraping ${count} styles from ${source}...`);
-    scrapeStyles(source, count, output);
+    try {
+      const { scrapeDesigns } = await import('../lib/scraper.js');
+      const styles = await scrapeDesigns(source, count);
+      writeFileSync(output, JSON.stringify(styles, null, 2));
+      console.log(`Saved ${styles.length} styles to ${output}`);
+    } catch (e) {
+      console.error('Error: Web scraping failed');
+      console.error('Install puppeteer: npm install puppeteer');
+      process.exit(1);
+    }
   },
   
-  'ai-image': (args) => {
+  'ai-image': async (args) => {
     const prompt = args.join(' ');
     const output = extractArg(args, '--output=') || 'generated-image.png';
     
+    if (!prompt) {
+      console.error('Error: Prompt required');
+      process.exit(1);
+    }
+    
     console.log(`Generating AI image: "${prompt}"...`);
-    generateAIImage(prompt, output);
+    try {
+      const { generateImage } = await import('../lib/ai-image.js');
+      const result = await generateImage(prompt, output);
+      if (result) {
+        console.log(`Image saved to: ${result}`);
+      }
+    } catch (e) {
+      console.error('Error: Image generation failed:', e.message);
+      process.exit(1);
+    }
   },
   
   carousel: (args) => {
     const type = extractArg(args, '--type=') || 'coverflow';
+    
+    const validTypes = ['coverflow', 'cardstack', 'parallax', 'timeline', 'horizontal'];
+    if (!validTypes.includes(type)) {
+      console.error(`Error: Invalid carousel type. Use: ${validTypes.join(', ')}`);
+      process.exit(1);
+    }
+    
     console.log(`Carousel template: ${type}`);
     console.log('');
     console.log('```markdown');
@@ -157,71 +266,76 @@ const commands = {
     console.log('...');
     console.log('<!-- /carousel -->');
     console.log('```');
-    console.log('\nAvailable types: coverflow, cardstack, parallax, timeline, horizontal');
+    console.log('\nAvailable types:', validTypes.join(', '));
   },
   
-export: (args) => {
+  export: (args) => {
     const input = args[0];
+    if (!input) {
+      console.error('Error: Input file required');
+      process.exit(1);
+    }
+    if (!existsSync(input)) {
+      console.error(`Error: File not found: ${input}`);
+      process.exit(1);
+    }
+    
     const format = extractArg(args, '--format=') || 'html';
+    const validFormats = ['html', 'pdf'];
+    if (!validFormats.includes(format)) {
+      console.error(`Error: Invalid format. Use: ${validFormats.join(', ')}`);
+      process.exit(1);
+    }
     
     console.log(`Exporting ${input} to ${format}...`);
     if (format === 'html') {
-      execSync(`${marpBin} ${input} -o ${input.replace('.md', '.html')}`, { stdio: 'inherit' });
+      execSync(`${MARP_BIN} ${input} -o ${input.replace('.md', '.html')}`, { stdio: 'inherit' });
     } else if (format === 'pdf') {
-      execSync(`${marpBin} ${input} -o ${input.replace('.md', '.pdf')} --pdf`, { stdio: 'inherit' });
+      execSync(`${MARP_BIN} ${input} -o ${input.replace('.md', '.pdf')} --pdf`, { stdio: 'inherit' });
     }
     console.log('Export complete!');
+  },
+  
+  version: () => {
+    console.log(`present v${VERSION}`);
   }
 };
-
-async function scrapeStyles(source, count, output) {
-  try {
-    const { scrapeDesigns } = await import('../lib/scraper.js');
-    const styles = await scrapeDesigns(source, count);
-    writeFileSync(output, JSON.stringify(styles, null, 2));
-    console.log(`Saved ${styles.length} styles to ${output}`);
-  } catch (e) {
-    console.log('Note: Web scraping requires puppeteer. Run: npm install puppeteer');
-    console.log('Scraping skipped.');
-  }
-}
-
-async function generateAIImage(prompt, output) {
-  try {
-    const { generateImage } = await import('../lib/ai-image.js');
-    const result = await generateImage(prompt, output);
-    if (result) console.log(`Image saved to: ${result}`);
-  } catch (e) {
-    console.log('Image generation failed:', e.message);
-  }
-}
-
-function extractArg(args, prefix) {
-  const arg = args.find(a => a.startsWith(prefix));
-  return arg ? arg.split('=')[1] : null;
-}
 
 const command = process.argv[2];
 const args = process.argv.slice(3);
 
-if (!command) {
+if (!command || command === 'help' || command === '--help' || command === '-h') {
+  console.log(`Present v${VERSION} - Marp-based presentation generator`);
+  console.log('');
   console.log('Usage: present <command> [options]');
   console.log('');
   console.log('Commands:');
-  console.log('  create <title> [--theme=professional|modern] [--style=<name>] [--size=16:9]');
-  console.log('  build <file.md>');
-  console.log('  serve <file.md> [--port=8080]');
-  console.log('  preview <file.md> [--port=3000]  # Live preview with hot reload');
-  console.log('  ai-generate <topic>');
-  console.log('  list');
-  console.log('  styles         # List available design styles');
-  console.log('  sizes          # List available slide sizes');
-  console.log('  chart <type> [data]  # Generate chart template');
-  console.log('  carousel --type=<type>  # Generate carousel template');
-  console.log('  scrape-styles <source> [--count=10] [--output=file.json]');
-  console.log('  ai-image "prompt" [--output=image.png]');
-  console.log('  export <file.md> --format=html|pdf');
-  process.exit(1);
+  console.log('  create <title>           Create new presentation');
+  console.log('  build <file.md>         Build HTML from markdown');
+  console.log('  serve <file.md>         Serve presentation locally');
+  console.log('  preview <file.md>       Live preview with hot reload');
+  console.log('  ai-generate <topic>     AI creation guidance');
+  console.log('  list                    List .md files');
+  console.log('  styles                  List 20 design styles');
+  console.log('  sizes                   List slide sizes');
+  console.log('  chart <type> [data]      Generate chart template');
+  console.log('  carousel --type=<type>  Generate carousel template');
+  console.log('  scrape-styles <source>  Scrape design inspiration');
+  console.log('  ai-image "prompt"       Generate AI image');
+  console.log('  export <file.md>        Export to HTML/PDF');
+  console.log('  version                 Show version');
+  console.log('');
+  console.log('Options:');
+  console.log('  --theme=professional|modern');
+  console.log('  --style=<name>          (20 styles available)');
+  console.log('  --size=16:9|4:3|1:1|9:16|21:9');
+  console.log('  --port=<number>');
+  console.log('  --format=html|pdf');
+  console.log('  --output=');
+  console.log('');
+  console.log('Run "present styles" to see all 20 design styles');
+  console.log('Run "present sizes" to see all slide sizes');
+  process.exit(0);
 }
 
 if (!commands[command]) {

@@ -1,6 +1,6 @@
-# OpenCode Presentations Skill
+# OpenCode Presentations Skill v2.0.0
 
-Marp-based presentation generator that creates professional HTML slides from Markdown.
+Enhanced Marp-based presentation generator with 20 design styles, carousels, charts, AI images, and live preview.
 
 ## Quick Start
 
@@ -8,125 +8,140 @@ Marp-based presentation generator that creates professional HTML slides from Mar
 # Clone the repository
 git clone https://github.com/molhamfetnah/opencode-presentations-skill.git
 
-# Navigate to the project
+# Navigate to project
 cd opencode-presentations-skill
 
 # Install dependencies
 npm install
 
 # Create your first presentation
-node presentations/bin/present create "My Talk" --theme=professional
+node presentations/bin/present create "My Talk" --style=neon-cyber --size=16:9
 
-# Build HTML slides
-node presentations/bin/present build my-talk.html
+# Build HTML
+node presentations/bin/present build my-talk.md
+
+# Live preview
+node presentations/bin/present preview my-talk.md --port=3000
+```
+
+## Features
+
+### 20 Design Styles
+
+| Category | Styles |
+|----------|--------|
+| **Modern** | Glassmorphism, Neon Cyber, Gradient Minimal, Isometric, Brutalist |
+| **Professional** | Corporate Blue, Executive Dark, Clean White, Editorial, Academic |
+| **Creative** | Geometric, Paper Cutout, Watercolor, Retro, Pop Art |
+| **Tech** | Terminal, Blueprint, Data Viz, Dev Tools, SaaS Dashboard |
+
+### 5 Slide Sizes
+
+| Size | Dimensions | Aspect Ratio |
+|------|------------|--------------|
+| 16:9 | 1920x1080 | Widescreen (default) |
+| 4:3 | 1440x1080 | Traditional |
+| 1:1 | 1080x1080 | Square |
+| 9:16 | 1080x1920 | Vertical/Stories |
+| 21:9 | 2560x1080 | Ultrawide |
+
+### Carousel Designs
+
+- Cover Flow — 3D perspective sliding
+- Card Stack — Stacked cards with depth
+- Parallax — Background parallax scrolling
+- Timeline — Horizontal timeline progression
+- Horizontal — Simple horizontal scroll
+
+### Chart Support
+
+Built-in templates for ApexCharts:
+- Bar, Line, Pie, Donut, Area, Radar, Gauge
+
+### AI Image Generation
+
+**Free (Pollinations.ai):** No API key needed
+```bash
+present ai-image "futuristic city skyline"
+```
+
+**Nano Banana API:** Set env var
+```bash
+export NANO_BANANA_API_KEY=your_key
+```
+
+### Web Scraping
+
+Scrape design inspiration from:
+- Dribbble
+- Behance
+- Awwwards
+
+```bash
+present scrape-styles dribbble --count=20 --output=inspiration.json
+```
+
+### Live Preview
+
+Real-time preview with hot reload:
+```bash
+present preview talk.md --port=3000
 ```
 
 ---
 
-## Installation & Integration Guide
+## Installation & Integration
 
-### Step 1: Clone the Repository
+### OpenCode Integration
 
-Open your terminal and run:
+Add to your `opencode.json`:
+
+```json
+{
+  "plugin": ["presentations@git+https://github.com/molhamfetnah/opencode-presentations-skill.git"]
+}
+```
+
+### Standalone CLI
 
 ```bash
-git clone https://github.com/molhamfetnah/opencode-presentations-skill.git
-```
+# Add to PATH
+export PATH="/path/to/opencode-presentations-skill/presentations/bin:$PATH"
 
-This creates a folder named `opencode-presentations-skill` in your current directory.
-
-### Step 2: Navigate to the Project
-
-```bash
-cd opencode-presentations-skill
-```
-
-### Step 3: Install Dependencies
-
-```bash
-npm install
-```
-
-This installs `@marp-team/marp-cli` - the core engine that converts Markdown to HTML slides.
-
-### Step 4: Verify Installation
-
-```bash
-node presentations/bin/present --help
-```
-
-You should see:
-
-```
-Usage: present <command> [options]
-Commands:
-  create <title> [--theme=professional|modern]
-  build <file.md>
-  serve <file.md>
-  ai-generate <topic>
-  list
+# Or add alias to ~/.zshrc
+alias present="node /path/to/opencode-presentations-skill/presentations/bin/present"
 ```
 
 ---
 
-## Step-by-Step: Creating Your First Presentation
+## CLI Commands
 
-### Method 1: Interactive Creation
+| Command | Description |
+|---------|-------------|
+| `present create "Title"` | Create presentation |
+| `present build file.md` | Build HTML |
+| `present serve file.md` | Serve locally |
+| `present preview file.md` | Live preview |
+| `present styles` | List styles |
+| `present sizes` | List sizes |
+| `present chart bar "data"` | Chart template |
+| `present carousel --type=coverflow` | Carousel template |
+| `present scrape-styles dribbble` | Scrape inspiration |
+| `present ai-image "prompt"` | AI image |
+| `present export file.md --format=pdf` | Export PDF |
+| `present ai-generate "topic"` | AI guidance |
+| `present list` | List .md files |
+| `present version` | Show version |
 
-**Step 1:** Create a new presentation file
+### Options
 
-```bash
-node presentations/bin/present create "Introduction to Machine Learning" --theme=professional
-```
-
-This creates `introduction-to-machine-learning.md` in your current directory.
-
-**Step 2:** Edit the content
-
-Open the created file in your favorite editor:
-
-```bash
-# Using vscode
-code introduction-to-machine-learning.md
-
-# Using vim
-vim introduction-to-machine-learning.md
-```
-
-Replace `{title}` and fill in your content. See [Writing Slides](#writing-slides) below.
-
-**Step 3:** Build HTML slides
-
-```bash
-node presentations/bin/present build introduction-to-machine-learning.md
-```
-
-This generates `introduction-to-machine-learning.html`.
-
-**Step 4:** Open in browser
-
-```bash
-# On Linux
-xdg-open introduction-to-machine-learning.html
-
-# On macOS
-open introduction-to-machine-learning.html
-
-# On Windows
-start introduction-to-machine-learning.html
-```
-
-### Method 2: Using AI Assistance
-
-**Step 1:** Get guidance
-
-```bash
-node presentations/bin/present ai-generate "Introduction to Machine Learning"
-```
-
-**Step 2:** Follow the AI suggestions to outline your presentation
-
-**Step 3:** Create the presentation (Method 1)
+| Option | Values | Default |
+|--------|--------|---------|
+| `--theme` | professional, modern | professional |
+| `--style` | 20 style names | default |
+| `--size` | 16:9, 4:3, 1:1, 9:16, 21:9 | 16:9 |
+| `--port` | number | 8080/3000 |
+| `--format` | html, pdf | html |
 
 ---
 
@@ -134,369 +149,129 @@ node presentations/bin/present ai-generate "Introduction to Machine Learning"
 
 ### Basic Structure
 
-Every presentation file starts with Marp directives:
-
 ```markdown
 ---
 marp: true
 theme: default
-class: lead
+size: 16:9
 paginate: true
 ---
 
 # Slide Title
 
 ---
+## New Slide
 
-## New Section
-
-- Bullet point 1
-- Bullet point 2
-- Bullet point 3
+Content here...
 ```
 
-### Marp Directives
-
-| Directive | Description | Example |
-|----------|-------------|---------|
-| `marp: true` | Enable Marp processing | Required |
-| `theme` | Built-in theme | `default`, `gaia`, `uncover` |
-| `class` | Section class | `lead`, `invert` |
-| `paginate` | Show slide numbers | `true` |
-| `size` | Slide size | `16:9` |
-| `style` | Custom CSS | (see below) |
-
-### Slide Separators
-
-Use `---` to separate slides:
-
-```markdown
-# Slide 1 Title
-
----
-
-# Slide 2 Title (new slide)
-```
-
-### Example: Professional Theme
+### With Custom Style
 
 ```markdown
 ---
 marp: true
 theme: default
-class: lead
-paginate: true
----
-
-# Introduction to Machine Learning
-
-**A Comprehensive Overview**
-
----
-
-## Agenda
-
-1. What is Machine Learning?
-2. Types of Learning
-3. Real-world Applications
-4. Getting Started
-
----
-
-## What is Machine Learning?
-
-### Definition
-
-Machine Learning is the study of algorithms that improve automatically through experience.
-
-### Key Concepts
-
-- **Training Data**: Examples used to learn
-- **Model**: The learned system
-- **Prediction**: Using the model on new data
-
----
-
-## Types of Learning
-
-### Supervised Learning
-
-- Classification
-- Regression
-
-### Unsupervised Learning
-
-- Clustering
-- Dimensionality Reduction
-
----
-
-## Conclusion
-
-- Machine Learning powers modern AI
-- Many applications in daily life
-- Start learning today!
-```
-
-### Example: Modern Theme
-
-```markdown
----
-marp: true
-theme: default
-class: lead
-paginate: true
+size: 16:9
 style: |
-  section.lead {
+  section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  }
-  section {
-    background: #f8f9fa;
-  }
-  section h1, section h2 {
-    color: #2c3e50;
-  }
-  section li {
-    color: #34495e;
   }
 ---
 
-# Introduction to Machine Learning
-
-**A Modern Approach**
-
----
-
-## Agenda
-
-1. What is ML?
-2. Key Concepts
-3. Applications
-4. Next Steps
-
----
-
-## What is ML?
-
-Machine Learning enables computers to learn from data.
-
----
-
-## Key Concepts
-
-- Training & Inference
-- Features & Labels
-- Models & Accuracy
-
----
-
-## Applications
-
-- Image Recognition
-- Natural Language Processing
-- Recommendation Systems
-
----
-
-## Next Steps
-
-- Start with scikit-learn
-- Practice with datasets
-- Join ML communities
+# Title
 ```
 
----
-
-## CLI Commands Reference
-
-### create
-
-Create a new presentation from template:
-
-```bash
-node presentations/bin/present create "Presentation Title" --theme=professional
-```
-
-Options:
-- `--theme=professional` (default) - Clean, academic style
-- `--theme=modern` - Vibrant, animated style
-
-### build
-
-Convert Markdown to HTML:
-
-```bash
-node presentations/bin/present build presentation.md
-```
-
-This creates `presentation.html`.
-
-### serve
-
-Serve presentation locally with live preview:
-
-```bash
-node presentations/bin/present serve presentation.md --port=8080
-```
-
-Open http://localhost:8080 in your browser.
-
-Options:
-- `--port=8080` (default) - Server port
-
-### ai-generate
-
-Get guidance for AI-assisted creation:
-
-```bash
-node presentations/bin/present ai-generate "Your Topic"
-```
-
-### list
-
-List all Markdown files in current directory:
-
-```bash
-node presentations/bin/present list
-```
-
----
-
-## Integration with OpenCode
-
-### Option 1: Direct Invocation
-
-Run from anywhere using full path:
-
-```bash
-# Add to your PATH
-export PATH="/path/to/opencode-presentations-skill/presentations/bin:$PATH"
-
-# Now you can use
-present create "My Talk"
-```
-
-### Option 2: Create an Alias
-
-Add to your `.bashrc` or `.zshrc`:
-
-```bash
-# Add to ~/.zshrc
-alias present='node /path/to/opencode-presentations-skill/presentations/bin/present'
-
-# Reload shell
-source ~/.zshrc
-
-# Now use
-present create "My Talk"
-```
-
-### Option 3: Use npx
-
-```bash
-# Clone first
-git clone https://github.com/molhamfetnah/opencode-presentations-skill.git
-
-# Run without adding to PATH
-npx present create "My Talk"
-```
-
----
-
-## Advanced Usage
-
-### PDF Export
-
-To generate PDF, use Marp directly:
-
-```bash
-npx marp presentation.md -o presentation.pdf --pdf
-```
-
-Note: Requires Chrome/Chromium for PDF rendering.
-
-### Custom Theme
-
-Create your own template in `templates/`:
+### Chart Directive
 
 ```markdown
----
-marp: true
-theme: default
-style: |
-  /* Your custom CSS */
-  section {
-    background: #your-color;
-    font-size: 32px;
-  }
----
-
-# Your Title
+<!-- chart:bar data="Q1:100,Q2:150,Q3:200,Q4:180" -->
 ```
 
-### Using with Reveal.js
+### Carousel Directive
 
-Marp outputs Reveal.js-compatible HTML. For full Reveal.js features:
+```markdown
+<!-- carousel:coverflow items="5" -->
+## Slide 1
+![image](url1)
+## Slide 2
+![image](url2)
+<!-- /carousel -->
+```
+
+---
+
+## Project Structure
+
+```
+opencode-presentations-skill/
+├── package.json
+├── presentations/
+│   ├── bin/present           # CLI entry point
+│   ├── templates/            # Base templates
+│   │   ├── professional.md
+│   │   └── modern.md
+│   ├── styles/              # 20 CSS styles
+│   ├── components/          # CSS components
+│   │   ├── carousel.css
+│   │   ├── charts.css
+│   │   └── preview.html
+│   ├── lib/                  # Utilities
+│   │   ├── preview-server.js
+│   │   ├── scraper.js
+│   │   └── ai-image.js
+│   └── SKILL.md
+├── .opencode/               # OpenCode plugin files
+├── CLAUDE.md
+├── ARCHITECTURE.md
+├── IMPLEMENTATION.md
+└── README.md
+```
+
+---
+
+## Dependencies
+
+| Package | Purpose | Required |
+|---------|---------|----------|
+| @marp-team/marp-cli | HTML/PDF generation | Yes |
+| apexcharts | Chart support | Yes |
+| express | Live preview server | Yes |
+| ws | WebSocket for hot reload | Yes |
+| chokidar | File watching | Yes |
+| puppeteer | Web scraping | Optional |
+
+Install optional dependencies:
 
 ```bash
-npx marp presentation.md -o presentation.html --reveal -t reveal
+npm install puppeteer
 ```
 
 ---
 
 ## Troubleshooting
 
-### Error: "npx: command not found"
-
-Install Node.js from https://nodejs.org/
-
-### Error: "marp not found"
-
-Run `npm install` in the project directory.
-
-### Presentation not displaying correctly
-
-Check your Markdown syntax. Ensure:
-- `---` separates slides
-- No extra whitespace before directives
-
-### Port already in use
-
-Specify a different port:
+### Marp not found
 
 ```bash
-node presentations/bin/present serve presentation.md --port=3000
+npm install
+```
+
+### Web scraping fails
+
+```bash
+npm install puppeteer
+```
+
+### AI images not generating
+
+Set API key or use free alternative:
+
+```bash
+export NANO_BANANA_API_KEY=your_key
+# OR use free Pollinations.ai (no key needed)
 ```
 
 ---
-
-## File Structure
-
-```
-opencode-presentations-skill/
-├── .gitignore
-├── README.md                    # This file
-├── ARCHITECTURE.md              # System architecture
-├── IMPLEMENTATION.md           # Code analysis
-├── package.json
-├── package-lock.json
-└── presentations/
-    ├── SKILL.md               # OpenCode skill definition
-    ├── bin/
-    │   └── present           # CLI entry point
-    └── templates/
-        ├── professional.md   # Professional theme
-        └── modern.md         # Modern theme
-```
-
----
-
-## Credits
-
-- Built with [Marp](https://marp.app/)
-- Inspired by OpenCode's skill ecosystem
 
 ## License
 
@@ -507,5 +282,4 @@ MIT License - feel free to use and modify!
 ## Questions?
 
 - Open an issue: https://github.com/molhamfetnah/opencode-presentations-skill/issues
-- Check ARCHITECTURE.md for detailed system design
-- Check IMPLEMENTATION.md for code analysis
+- Documentation: See ARCHITECTURE.md and IMPLEMENTATION.md

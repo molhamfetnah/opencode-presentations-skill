@@ -1,6 +1,30 @@
+# Dependencies
 node_modules/
+
+# Build outputs
+*.html
 *.pdf
-.DS_Store
-!presentations/components/*.html
 generated-*.png
 scraped-*.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Keep components
+!presentations/components/*.html
+!presentations/components/*.css
+!presentations/components/*.js
+!presentations/styles/*.css

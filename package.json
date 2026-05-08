@@ -1,8 +1,28 @@
 {
   "name": "@opencode/presentations",
   "version": "2.0.0",
-  "description": "Enhanced Marp-based presentation generator for OpenCode with carousels, 20 styles, charts, AI images, and live preview",
+  "description": "Enhanced Marp-based presentation generator for OpenCode with 20 styles, carousels, charts, AI images, and live preview",
   "type": "module",
+  "keywords": [
+    "presentations",
+    "slides",
+    "marp",
+    "opencode",
+    "skill"
+  ],
+  "author": {
+    "name": "Mulham Fetna",
+    "email": "molhamfetnah@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/molhamfetnah/opencode-presentations-skill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/molhamfetnah/opencode-presentations-skill/issues"
+  },
+  "homepage": "https://github.com/molhamfetnah/opencode-presentations-skill",
   "bin": {
     "present": "./presentations/bin/present"
   },
@@ -18,5 +38,12 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "node presentations/bin/present --help",
+    "postinstall": "echo 'Install complete. Run: node presentations/bin/present --help'"
+  },
+  "opencode": {
+    "skills": ["presentations"]
   }
 }
