@@ -446,85 +446,228 @@
       margin-bottom: 40px;
     }
     
-    /* Footer */
-    footer {
-      padding: 48px 0;
-      border-top: 1px solid var(--border);
+/* Demo Section */
+    .demo-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      margin: 80px 0;
     }
     
-    footer .container {
+    .demo-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 30px;
       flex-wrap: wrap;
       gap: 20px;
     }
     
-    footer p {
-      color: var(--muted);
-      font-size: 0.85rem;
+    .demo-tabs {
+      display: flex;
+      gap: 8px;
     }
     
-    footer a {
+    .demo-tab {
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
       color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
     }
     
-    footer a:hover {
+    .demo-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+    
+    .demo-tab:hover:not(.active) {
+      border-color: var(--muted);
       color: var(--text);
     }
     
-    /* Mobile */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hero-visual { display: none; }
-      .float-card { display: none; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-    }
-    
-    /* RTL Arabic Section */
-    .rtl-section {
-      background: linear-gradient(180deg, var(--bg) 0%, #1a1a2e 100%);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    
-    .rtl-preview {
+    .demo-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      margin-top: 48px;
+      gap: 30px;
     }
     
-    .rtl-sample {
-      background: var(--surface);
+    @media (max-width: 900px) {
+      .demo-content { grid-template-columns: 1fr; }
+    }
+    
+    .demo-editor {
+      background: #0d0d0e;
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 32px;
+      overflow: hidden;
     }
     
-    .rtl-sample h4 {
-      font-size: 1.1rem;
-      margin-bottom: 16px;
-      color: var(--muted);
+    .demo-editor-header {
+      padding: 12px 16px;
+      background: #1a1a1d;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
     }
     
-    .arabic-text {
-      font-family: 'Cairo', sans-serif;
+    .demo-editor-header span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    
+    .demo-editor-header span:nth-child(1) { background: #ff5f57; }
+    .demo-editor-header span:nth-child(2) { background: #febc2e; }
+    .demo-editor-header span:nth-child(3) { background: #28c840; }
+    
+    .demo-editor pre {
+      padding: 20px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #e2e8f0;
+      overflow-x: auto;
+      min-height: 300px;
+    }
+    
+    .demo-preview {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .demo-preview-header {
+      background: #f3f4f6;
+      padding: 10px 16px;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    
+    .demo-preview-body {
+      padding: 30px;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .demo-preview-body h1 {
       font-size: 1.8rem;
-      font-weight: 700;
-      line-height: 1.8;
+      color: #1f2937;
+      margin-bottom: 12px;
+    }
+    
+    .demo-preview-body p {
+      color: #6b7280;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    
+    /* Style Switcher */
+    .style-switcher {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    
+    .style-btn {
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+    
+    .style-btn:hover, .style-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+    
+    /* Font Demo */
+    .font-demo {
+      font-size: 2rem;
+      padding: 20px;
+      text-align: center;
       direction: rtl;
+      line-height: 1.8;
     }
     
-    .arabic-text .highlight {
-      color: var(--accent);
+    .font-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
     }
     
-    @media (max-width: 768px) {
-      .rtl-preview { grid-template-columns: 1fr; }
+    .font-item {
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
     }
+    
+    .font-item:hover, .font-item.active {
+      border-color: var(--accent);
+      transform: scale(1.02);
+    }
+    
+    .font-item .font-name {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    
+    .font-item .font-sample {
+      font-size: 1.4rem;
+    }
+    
+    /* Interactive Gallery */
+    .mini-gallery {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 20px;
+    }
+    
+    .mini-slide {
+      aspect-ratio: 16/9;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .mini-slide:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .mini-slide.glassmorphism { background: linear-gradient(135deg, #667eea24, #764ba224), #1a1a2e; }
+    .mini-slide.neon-cyber { background: linear-gradient(135deg, #0d0221, #1a0a2e); }
+    .mini-slide.terminal { background: #0d1117; }
+    .mini-slide.retro { background: #ffeaa7; color: #333; }
+    .mini-slide.pop-art { background: #ff006e; }
   </style>
 </head>
 <body>
@@ -541,6 +684,7 @@
         Present
       </a>
       <ul class="nav-links">
+        <li><a href="#demos">Demos</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#styles">Styles</a></li>
         <li><a href="#usecases">Use Cases</a></li>
@@ -581,6 +725,143 @@
     </div>
     <div class="float-card">
       <span>⚡</span> Live preview
+    </div>
+  </section>
+  
+  <!-- Live Demo -->
+  <section id="demos">
+    <div class="container">
+      <div class="section-label">
+        <span>🎮</span> Try It Live
+      </div>
+      <h2 class="section-title">See it in action.</h2>
+      <p class="section-desc">Pick a style, write some markdown, watch the magic happen.</p>
+      
+      <div class="demo-section">
+        <div class="demo-header">
+          <h3>Interactive Style Preview</h3>
+          <div class="demo-tabs">
+            <button class="demo-tab active" onclick="switchDemo('editor')">Editor</button>
+            <button class="demo-tab" onclick="switchDemo('gallery')">Gallery</button>
+            <button class="demo-tab" onclick="switchDemo('fonts')">Arabic Fonts</button>
+          </div>
+        </div>
+        
+        <div id="demo-editor" class="demo-content">
+          <div class="demo-editor">
+            <div class="demo-editor-header">
+              <span></span><span></span><span></span>
+              <span style="margin-left: 12px; color: #71717a; font-size: 0.75rem;">slides.md</span>
+            </div>
+            <pre id="code-editor" contenteditable="true">---
+marp: true
+theme: default
+size: 16:9
+---
+
+# Hello World
+
+Welcome to **Presentations for OpenCode**
+
+---
+
+## Features
+
+- 20 design styles
+- RTL support
+- Live preview
+
+---
+
+## Get Started
+
+```bash
+node present create "My Talk"
+```</pre>
+          </div>
+          <div class="demo-preview" id="preview-box">
+            <div class="demo-preview-header">Live Preview</div>
+            <div class="demo-preview-body" id="live-preview">
+              <h1 style="font-size: 2rem; color: #1f2937; margin-bottom: 16px;">Hello World</h1>
+              <p style="color: #6b7280; margin-bottom: 20px;">Welcome to <strong>Presentations for OpenCode</strong></p>
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <h3 style="color: #374151; margin-bottom: 12px;">Features</h3>
+                <ul style="color: #6b7280; list-style: disc; padding-left: 20px;">
+                  <li>20 design styles</li>
+                  <li>RTL support</li>
+                  <li>Live preview</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="demo-gallery" class="demo-content" style="display: none;">
+          <div style="grid-column: 1 / -1;">
+            <h4 style="margin-bottom: 16px; color: var(--muted);">Click any style to preview</h4>
+            <div class="mini-gallery">
+              <div class="mini-slide glassmorphism" onclick="selectStyle('glassmorphism')">Glass</div>
+              <div class="mini-slide neon-cyber" onclick="selectStyle('neon-cyber')">Neon</div>
+              <div class="mini-slide terminal" onclick="selectStyle('terminal')">Terminal</div>
+              <div class="mini-slide retro" onclick="selectStyle('retro')">Retro</div>
+              <div class="mini-slide pop-art" onclick="selectStyle('pop-art')">Pop Art</div>
+              <div class="mini-slide" style="background: #1a365d;" onclick="selectStyle('corporate-blue')">Corporate</div>
+              <div class="mini-slide" style="background: #1a1a2e;" onclick="selectStyle('executive-dark')">Executive</div>
+              <div class="mini-slide" style="background: linear-gradient(135deg, #667eea, #764ba2);" onclick="selectStyle('gradient-minimal')">Gradient</div>
+              <div class="mini-slide" style="background: #fff;" onclick="selectStyle('clean-white')">Clean</div>
+              <div class="mini-slide" style="background: #0f172a;" onclick="selectStyle('geometric')">Geometric</div>
+            </div>
+            <div class="style-switcher">
+              <button class="style-btn active" onclick="applyStyle('glassmorphism', this)">Glassmorphism</button>
+              <button class="style-btn" onclick="applyStyle('neon-cyber', this)">Neon Cyber</button>
+              <button class="style-btn" onclick="applyStyle('terminal', this)">Terminal</button>
+              <button class="style-btn" onclick="applyStyle('retro', this)">Retro</button>
+              <button class="style-btn" onclick="applyStyle('pop-art', this)">Pop Art</button>
+              <button class="style-btn" onclick="applyStyle('corporate-blue', this)">Corporate Blue</button>
+              <button class="style-btn" onclick="applyStyle('executive-dark', this)">Executive Dark</button>
+              <button class="style-btn" onclick="applyStyle('gradient-minimal', this)">Gradient Minimal</button>
+              <button class="style-btn" onclick="applyStyle('clean-white', this)">Clean White</button>
+              <button class="style-btn" onclick="applyStyle('brutalist', this)">Brutalist</button>
+            </div>
+          </div>
+        </div>
+        
+        <div id="demo-fonts" class="demo-content" style="display: none;">
+          <div style="grid-column: 1 / -1;">
+            <div class="font-list">
+              <div class="font-item active" onclick="selectFont('Tajawal', this)" style="font-family: 'Tajawal', sans-serif;">
+                <div class="font-name">Tajawal</div>
+                <div class="font-sample">مرحباً بالعالم</div>
+              </div>
+              <div class="font-item" onclick="selectFont('Cairo', this)" style="font-family: 'Cairo', sans-serif;">
+                <div class="font-name">Cairo</div>
+                <div class="font-sample">الخطوط العربية</div>
+              </div>
+              <div class="font-item" onclick="selectFont('Noto+Naskh+Arabic', this)" style="font-family: 'Noto Naskh Arabic', serif;">
+                <div class="font-name">Noto Naskh Arabic</div>
+                <div class="font-sample">نص عربي اختباري</div>
+              </div>
+              <div class="font-item" onclick="selectFont('Amiri', this)" style="font-family: 'Amiri', serif;">
+                <div class="font-name">Amiri</div>
+                <div class="font-sample">الخط العربي الجميل</div>
+              </div>
+              <div class="font-item" onclick="selectFont('Lateef', this)" style="font-family: 'Lateef', serif;">
+                <div class="font-name">Lateef</div>
+                <div class="font-sample">عرض تقديمي</div>
+              </div>
+              <div class="font-item" onclick="selectFont('El+Messiri', this)" style="font-family: 'El Messiri', sans-serif;">
+                <div class="font-name">El Messiri</div>
+                <div class="font-sample">الذكاء الاصطناعي</div>
+              </div>
+            </div>
+            <div id="font-preview" class="font-demo" style="margin-top: 30px; font-family: 'Tajawal', sans-serif;">
+              <span style="color: var(--accent);">مرحباً بالعالم</span>
+              <br>
+              هذا نص عربي اختباري لعرض الخطوط
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   
@@ -800,6 +1081,61 @@
   </footer>
   
   <script>
+    // Demo tab switching
+    function switchDemo(tab) {
+      document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('demo-editor').style.display = tab === 'editor' ? 'grid' : 'none';
+      document.getElementById('demo-gallery').style.display = tab === 'gallery' ? 'grid' : 'none';
+      document.getElementById('demo-fonts').style.display = tab === 'fonts' ? 'grid' : 'none';
+    }
+    
+    // Style switching
+    const styleConfigs = {
+      'glassmorphism': { bg: 'linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15)), #1a1a2e', text: '#fff', accent: '#00d4ff' },
+      'neon-cyber': { bg: 'linear-gradient(135deg, #0d0221, #1a0a2e)', text: '#f0f', accent: '#0ff' },
+      'terminal': { bg: '#0d1117', text: '#00ff00', accent: '#39d353' },
+      'retro': { bg: '#ffeaa7', text: '#2d3436', accent: '#e17055' },
+      'pop-art': { bg: '#ff006e', text: '#fff', accent: '#ffbe0b' },
+      'corporate-blue': { bg: '#1a365d', text: '#fff', accent: '#63b3ed' },
+      'executive-dark': { bg: '#1a1a2e', text: '#e2e8f0', accent: '#a78bfa' },
+      'gradient-minimal': { bg: 'linear-gradient(135deg, #667eea, #764ba2)', text: '#fff', accent: '#fff' },
+      'clean-white': { bg: '#fff', text: '#1a202c', accent: '#3182ce' },
+      'brutalist': { bg: '#000', text: '#fff', accent: '#ff0' }
+    };
+    
+    function applyStyle(style, btn) {
+      document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const config = styleConfigs[style];
+      const preview = document.getElementById('preview-box');
+      preview.style.background = config.bg;
+      preview.style.color = config.text;
+      
+      const body = preview.querySelector('.demo-preview-body');
+      body.style.background = config.bg;
+      body.querySelectorAll('h1, h3, p, li').forEach(el => {
+        if (el.tagName === 'H1') el.style.color = config.text;
+        else if (el.tagName === 'H3') el.style.color = config.text;
+        else el.style.color = config.accent;
+      });
+    }
+    
+    function selectStyle(style) {
+      const btn = document.querySelector(`.style-btn[onclick*="${style}"]`);
+      if (btn) applyStyle(style, btn);
+    }
+    
+    // Font switching
+    function selectFont(font, el) {
+      document.querySelectorAll('.font-item').forEach(f => f.classList.remove('active'));
+      el.classList.add('active');
+      
+      const preview = document.getElementById('font-preview');
+      preview.style.fontFamily = `'${font}', sans-serif`;
+    }
+    
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
