@@ -295,6 +295,11 @@
     .feature-card:hover {
       border-color: var(--accent);
       transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1) rotate(5deg);
     }
     
     .feature-icon {
@@ -444,6 +449,50 @@
       color: var(--muted);
       font-size: 1.1rem;
       margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* RTL Section */
+    .rtl-section {
+      background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .rtl-preview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-top: 48px;
+    }
+    
+    .rtl-sample {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    
+    .rtl-sample h4 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    
+    .arabic-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 2;
+      direction: rtl;
+    }
+    
+    .arabic-text .highlight {
+      color: var(--accent);
+    }
+    
+    @media (max-width: 768px) {
+      .rtl-preview { grid-template-columns: 1fr; }
     }
     
 /* Demo Section */
@@ -704,14 +753,32 @@
         <div class="section-label">
           <span>✨</span> For OpenCode Users
         </div>
-        <h1>Presentations that<br><span>look like you mean it</span></h1>
-        <p>Transform your ideas into stunning slides. 20 design styles, full RTL support, Arabic fonts, live preview — all in your terminal.</p>
+        <h1>Professional Presentations<br><span>Built From Your Terminal</span></h1>
+        <p>Stop wrestling with bloated slide software. Create stunning, version-controlled presentations using the tools you already know — Markdown, Git, and your command line. Whether you're crafting technical documentation, delivering client pitches, or presenting research findings, Presentations for OpenCode delivers professional results without leaving your workflow.</p>
         <div class="hero-buttons">
           <a href="#quickstart" class="btn btn-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             Start Creating
           </a>
-          <a href="#features" class="btn btn-outline">See Features</a>
+          <a href="#features" class="btn btn-outline">Explore Features</a>
+        </div>
+        <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 32px; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.9rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            No PowerPoint required
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.9rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Version control friendly
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.9rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Full RTL support
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.9rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            20 design styles included
+          </div>
         </div>
       </div>
     </div>
@@ -734,15 +801,15 @@
       <div class="section-label">
         <span>🎮</span> Try It Live
       </div>
-      <h2 class="section-title">See it in action.</h2>
-      <p class="section-desc">Pick a style, write some markdown, watch the magic happen.</p>
+      <h2 class="section-title">Experience It Before You Install.<br>Interactive Demos Below.</h2>
+      <p class="section-desc">Explore the editor, browse design styles, and test Arabic fonts — all without installing anything. Click through the demos below to see how Presentations for OpenCode works in practice.</p>
       
       <div class="demo-section">
         <div class="demo-header">
-          <h3>Interactive Style Preview</h3>
+          <h3>Interactive Preview</h3>
           <div class="demo-tabs">
-            <button class="demo-tab active" onclick="switchDemo('editor')">Editor</button>
-            <button class="demo-tab" onclick="switchDemo('gallery')">Gallery</button>
+            <button class="demo-tab active" onclick="switchDemo('editor')">Markdown Editor</button>
+            <button class="demo-tab" onclick="switchDemo('gallery')">Style Gallery</button>
             <button class="demo-tab" onclick="switchDemo('fonts')">Arabic Fonts</button>
           </div>
         </div>
@@ -871,44 +938,56 @@ node present create "My Talk"
       <div class="section-label">
         <span>🛠️</span> Built for Developers
       </div>
-      <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
-      <p class="section-desc">A presentation tool that respects your workflow. Command-line interface, version control friendly, and extensible.</p>
+      <h2 class="section-title">A Presentation Tool That<br>Respects Your Workflow</h2>
+      <p class="section-desc">Command-line interface, version control friendly, and extensible. Built by developers who were tired of fighting with slide software that gets in the way of actually communicating ideas.</p>
       
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">🎨</div>
-          <h3>20 Design Styles</h3>
-          <p>From glassmorphism to brutalist. Pick from Modern, Professional, Creative, and Tech categories. Or combine them your way.</p>
+          <h3>20 Professionally Crafted Design Styles</h3>
+          <p>From glassmorphism to brutalist, from corporate blue to terminal. Each style has been thoughtfully designed for specific contexts — whether you're presenting to executives, teaching a class, or documenting an API. Pick a style that fits your audience.</p>
         </div>
         
         <div class="feature-card">
           <div class="feature-icon">🔤</div>
-          <h3>Full RTL Support</h3>
-          <p>Arabic, Hebrew, Farsi — the full bidirectional text treatment. 49 Google fonts with proper direction handling.</p>
+          <h3>Full Bidirectional Text Support</h3>
+          <p>Arabic, Hebrew, Farsi — complete right-to-left text treatment with proper direction handling. Includes 49 Google Fonts pre-configured with proper ligatures, kerning, and regional character support for authentic typography.</p>
         </div>
         
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
-          <h3>Live Preview</h3>
-          <p>Edit your markdown, see changes instantly. Hot reload keeps your flow while you iterate on content.</p>
+          <h3>Real-Time Live Preview</h3>
+          <p>Edit your Markdown and watch changes appear instantly. Hot reload keeps your creative flow while you iterate. No context switching, no waiting for exports. Your slides update as you type.</p>
         </div>
         
         <div class="feature-card">
           <div class="feature-icon">📊</div>
-          <h3>Charts & Carousels</h3>
-          <p>Built-in ApexCharts integration. Five carousel types — coverflow, parallax, timeline, and more.</p>
+          <h3>Interactive Charts & Carousels</h3>
+          <p>Built-in ApexCharts integration for data visualizations. Five carousel types — coverflow, parallax, timeline, and more — ready to drop into any presentation with simple Markdown syntax.</p>
         </div>
         
         <div class="feature-card">
           <div class="feature-icon">🤖</div>
-          <h3>AI Image Generation</h3>
-          <p>Generate images directly in your slides. Free tier via Pollinations, or plug in your own API key.</p>
+          <h3>AI-Powered Image Generation</h3>
+          <p>Generate images directly within your slides using AI. Free tier via Pollinations, or plug in your own OpenAI or similar API key for higher volume. Integrates seamlessly into your Markdown workflow.</p>
         </div>
         
         <div class="feature-card">
           <div class="feature-icon">📐</div>
-          <h3>5 Slide Sizes</h3>
-          <p>16:9, 4:3, 1:1, 9:16 (stories), 21:9 ultrawide. Pick the right aspect for your audience.</p>
+          <h3>Five Slide Aspect Ratios</h3>
+          <p>16:9 (widescreen), 4:3 (traditional), 1:1 (square), 9:16 (vertical stories), and 21:9 (ultrawide). Choose the format that matches your delivery platform and audience.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔧</div>
+          <h3>Interactive Wizard & CLI</h3>
+          <p>Not sure where to start? The built-in wizard guides you through theme selection, style customization, and output format. Or use the CLI directly for scriptable, repeatable workflows.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3>Export to HTML & PDF</h3>
+          <p>Generate self-contained HTML presentations or export to PDF with a single command. Perfect for sharing via email, hosting on your site, or archiving for future reference.</p>
         </div>
       </div>
     </div>
@@ -920,30 +999,62 @@ node present create "My Talk"
       <div class="section-label">
         <span>🎭</span> Design Library
       </div>
-      <h2 class="section-title">Pick your vibe.<br>Own your look.</h2>
-      <p class="section-desc">Twenty distinct styles, grouped into four categories. Each one crafted for specific contexts.</p>
+      <h2 class="section-title">Twenty Distinct Styles.<br>Four Intentional Categories.</h2>
+      <p class="section-desc">Each style has been crafted for specific contexts and audiences. Whether you're going for cutting-edge visual impact, corporate professionalism, creative expression, or technical precision — there's a style that fits. Every style is production-ready and renders consistently across browsers.</p>
       
-      <div class="styles-showcase">
-        <div class="style-chip"><span class="dot" style="background:#00d4ff"></span>Glassmorphism</div>
-        <div class="style-chip"><span class="dot" style="background:#f0f"></span>Neon Cyber</div>
-        <div class="style-chip"><span class="dot" style="background:#667eea"></span>Gradient Minimal</div>
-        <div class="style-chip"><span class="dot" style="background:#00cec9"></span>Isometric</div>
-        <div class="style-chip"><span class="dot" style="background:#ff0"></span>Brutalist</div>
-        <div class="style-chip"><span class="dot" style="background:#63b3ed"></span>Corporate Blue</div>
-        <div class="style-chip"><span class="dot" style="background:#a78bfa"></span>Executive Dark</div>
-        <div class="style-chip"><span class="dot" style="background:#3182ce"></span>Clean White</div>
-        <div class="style-chip"><span class="dot" style="background:#c05621"></span>Editorial</div>
-        <div class="style-chip"><span class="dot" style="background:#2b6cb0"></span>Academic</div>
-        <div class="style-chip"><span class="dot" style="background:#fbbf24"></span>Geometric</div>
-        <div class="style-chip"><span class="dot" style="background:#8b4513"></span>Paper Cutout</div>
-        <div class="style-chip"><span class="dot" style="background:#ed8936"></span>Watercolor</div>
-        <div class="style-chip"><span class="dot" style="background:#e17055"></span>Retro</div>
-        <div class="style-chip"><span class="dot" style="background:#ffbe0b"></span>Pop Art</div>
-        <div class="style-chip"><span class="dot" style="background:#00ff00"></span>Terminal</div>
-        <div class="style-chip"><span class="dot" style="background:#66b2ff"></span>Blueprint</div>
-        <div class="style-chip"><span class="dot" style="background:#89b4fa"></span>Data Viz</div>
-        <div class="style-chip"><span class="dot" style="background:#61afef"></span>Dev Tools</div>
-        <div class="style-chip"><span class="dot" style="background:#6366f1"></span>SaaS Dashboard</div>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 60px;">
+        <div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 16px; color: var(--text); display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.4rem;">✨</span> Modern
+          </h3>
+          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px;">Contemporary aesthetics for tech-forward presentations. Perfect for product launches, startup pitches, and modern UI showcases.</p>
+          <div class="styles-showcase">
+            <div class="style-chip"><span class="dot" style="background:#00d4ff"></span>Glassmorphism</div>
+            <div class="style-chip"><span class="dot" style="background:#f0f"></span>Neon Cyber</div>
+            <div class="style-chip"><span class="dot" style="background:#667eea"></span>Gradient Minimal</div>
+            <div class="style-chip"><span class="dot" style="background:#00cec9"></span>Isometric</div>
+            <div class="style-chip"><span class="dot" style="background:#ff0"></span>Brutalist</div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 16px; color: var(--text); display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.4rem;">💼</span> Professional
+          </h3>
+          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px;">Traditional polish for business contexts. Designed for client meetings, executive briefings, and formal documentation.</p>
+          <div class="styles-showcase">
+            <div class="style-chip"><span class="dot" style="background:#63b3ed"></span>Corporate Blue</div>
+            <div class="style-chip"><span class="dot" style="background:#a78bfa"></span>Executive Dark</div>
+            <div class="style-chip"><span class="dot" style="background:#3182ce"></span>Clean White</div>
+            <div class="style-chip"><span class="dot" style="background:#c05621"></span>Editorial</div>
+            <div class="style-chip"><span class="dot" style="background:#2b6cb0"></span>Academic</div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 16px; color: var(--text); display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.4rem;">🎨</span> Creative
+          </h3>
+          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px;">Expressive styles for when you want your slides to make an artistic statement. Ideal for design critiques, art presentations, and creative workshops.</p>
+          <div class="styles-showcase">
+            <div class="style-chip"><span class="dot" style="background:#fbbf24"></span>Geometric</div>
+            <div class="style-chip"><span class="dot" style="background:#8b4513"></span>Paper Cutout</div>
+            <div class="style-chip"><span class="dot" style="background:#ed8936"></span>Watercolor</div>
+            <div class="style-chip"><span class="dot" style="background:#e17055"></span>Retro</div>
+            <div class="style-chip"><span class="dot" style="background:#ffbe0b"></span>Pop Art</div>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-size: 1.1rem; margin-bottom: 16px; color: var(--text); display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.4rem;">⌨️</span> Technical
+          </h3>
+          <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 20px;">Developer-focused aesthetics for technical documentation, architecture reviews, and DevOps workflows. Terminal vibes and data visualizations.</p>
+          <div class="styles-showcase">
+            <div class="style-chip"><span class="dot" style="background:#00ff00"></span>Terminal</div>
+            <div class="style-chip"><span class="dot" style="background:#66b2ff"></span>Blueprint</div>
+            <div class="style-chip"><span class="dot" style="background:#89b4fa"></span>Data Viz</div>
+            <div class="style-chip"><span class="dot" style="background:#61afef"></span>Dev Tools</div>
+            <div class="style-chip"><span class="dot" style="background:#6366f1"></span>SaaS Dashboard</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -954,12 +1065,13 @@ node present create "My Talk"
       <div class="section-label">
         <span>🌍</span> Global Ready
       </div>
-      <h2 class="section-title">Right-to-left?<br>We got you.</h2>
-      <p class="section-desc">Tested with 49 Arabic fonts across 48 design styles. Your slides look right in any language.</p>
+      <h2 class="section-title">Built for Global Audiences.<br>Right-to-Left Out of the Box.</h2>
+      <p class="section-desc">Tested extensively with 49 Arabic fonts across all 20 design styles. Your slides look professionally typeset in any language — Arabic, Hebrew, Farsi, Urdu, and more. Full bidirectional text support means content flows correctly regardless of writing direction.</p>
       
       <div class="rtl-preview">
         <div class="rtl-sample">
           <h4>Arabic (RTL)</h4>
+          <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 12px;">Professional Arabic typography with proper ligatures and kerning</p>
           <div class="arabic-text">
             <span class="highlight">مرحباً بالعالم</span><br>
             هذا عرض تقديمي باللغة العربية
@@ -967,12 +1079,16 @@ node present create "My Talk"
         </div>
         <div class="rtl-sample">
           <h4>English (LTR)</h4>
+          <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 12px;">Clean left-to-right rendering with excellent legibility</p>
           <div style="font-size: 1.8rem; font-weight: 700; line-height: 1.8;">
             <span style="color: var(--accent);">Hello World</span><br>
             This is an English presentation
           </div>
         </div>
       </div>
+      <p style="text-align: center; color: var(--muted); margin-top: 32px; font-size: 0.9rem;">
+        Compatible with 49+ Google Fonts including Tajawal, Cairo, Noto Naskh Arabic, Amiri, Lateef, and El Messiri
+      </p>
     </div>
   </section>
   
@@ -980,35 +1096,35 @@ node present create "My Talk"
   <section id="usecases">
     <div class="container">
       <div class="section-label">
-        <span>💼</span> Real World
+        <span>💼</span> Real World Applications
       </div>
-      <h2 class="section-title">Works where you work.</h2>
-      <p class="section-desc">Technical documentation, team presentations, client pitches — wherever you need to communicate, this fits.</p>
+      <h2 class="section-title">Works Where You Work.</h2>
+      <p class="section-desc">Technical documentation, team presentations, client pitches — Presentations for OpenCode fits seamlessly into whatever workflow you're already using. Version control your slides, collaborate with your team, and deliver with confidence.</p>
       
       <div class="usecases-grid">
         <div class="usecase-card">
           <h4>📚 Technical Documentation</h4>
-          <p>Create API docs, architecture overviews, and runbooks that actually look good. Version control friendly markdown.</p>
+          <p>Create API documentation, architecture overviews, runbooks, and technical guides that actually look professional. Markdown-based and version control friendly — your documentation can live next to your code in the same repository.</p>
         </div>
         <div class="usecase-card">
           <h4>🎓 Academic Research</h4>
-          <p>Conference talks, thesis defenses, lab updates. Academic and editorial styles keep things professional.</p>
+          <p>Conference presentations, thesis defenses, lab meeting updates, and research proposals. The academic and editorial styles ensure your work maintains the professional tone required by academic contexts while remaining visually engaging.</p>
         </div>
         <div class="usecase-card">
-          <h4>💼 Client Pitches</h4>
-          <p>Corporate blue or executive dark. Clean, polished decks that don't look like a PowerPoint template.</p>
+          <h4>💼 Client Pitches & Business Presentations</h4>
+          <p>Corporate blue or executive dark styles deliver the polished, professional appearance that client meetings demand. Clean typography and consistent layouts ensure your message takes center stage without visual distractions.</p>
         </div>
         <div class="usecase-card">
-          <h4>🌍 Arabic Content</h4>
-          <p>RTL slides for Arabic-speaking audiences. Full font support, proper text direction, regional styling.</p>
+          <h4>🌍 Arabic & RTL Content</h4>
+          <p>RTL slides for Arabic-speaking audiences across the Middle East and North Africa. Full font support with proper text direction, authentic Arabic typography, and regional styling that respects cultural context.</p>
         </div>
         <div class="usecase-card">
-          <h4>📱 Social Stories</h4>
-          <p>9:16 vertical format for Instagram, TikTok, LinkedIn stories. Carousel templates included.</p>
+          <h4>📱 Social Media Stories</h4>
+          <p>9:16 vertical format optimized for Instagram, TikTok, LinkedIn, and Snapchat stories. Create carousel-friendly presentations that look native on mobile platforms with built-in carousel templates.</p>
         </div>
         <div class="usecase-card">
-          <h4>🤖 AI Workflows</h4>
-          <p>Generate images inline, scrape design inspiration, integrate with your AI tools. The whole pipeline.</p>
+          <h4>🤖 AI-Powered Workflows</h4>
+          <p>Generate images inline, scrape design inspiration from Dribbble, and integrate with your AI tools. The complete pipeline from concept to visual asset — all within your presentation workflow.</p>
         </div>
       </div>
     </div>
@@ -1020,19 +1136,39 @@ node present create "My Talk"
       <div class="section-label">
         <span>🚀</span> Quick Start
       </div>
-      <h2 class="section-title">Up in 30 seconds.</h2>
-      <p class="section-desc">Install, create, preview. Three commands and you're looking at your first slide.</p>
+      <h2 class="section-title">From Installation to Your First Slide<br>in Under 30 Seconds</h2>
+      <p class="section-desc">Install the package, create your presentation, preview it live. Three commands — that's all it takes to create your first professional presentation.</p>
       
       <div class="code-block">
-<pre><span class="comment"># Clone and install</span>
+<pre><span class="comment"># Step 1: Clone the repository</span>
 <span class="command">git clone</span> https://github.com/molhamfetnah/opencode-presentations-skill.git
 <span class="command">cd</span> opencode-presentations-skill && <span class="command">npm install</span>
 
-<span class="comment"># Create your first presentation</span>
+<span class="comment"># Step 2: Create your first presentation</span>
+<span class="comment"># The wizard will guide you through theme and style selection</span>
 <span class="keyword">node</span> presentations/bin/present create <span class="string">"My Talk"</span> --style=glassmorphism
 
-<span class="comment"># Preview with live reload</span>
+<span class="comment"># Step 3: Preview with live reload</span>
+<span class="comment"># Opens at http://localhost:3000 — changes update instantly</span>
 <span class="keyword">node</span> presentations/bin/present preview my-talk.md --port=3000</pre>
+      </div>
+      
+      <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+        <div style="padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px;">
+          <div style="font-size: 2rem; margin-bottom: 12px;">📝</div>
+          <h4 style="margin-bottom: 8px;">Write in Markdown</h4>
+          <p style="color: var(--muted); font-size: 0.9rem;">Simple, readable syntax that version controls beautifully and works with your existing tools.</p>
+        </div>
+        <div style="padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px;">
+          <div style="font-size: 2rem; margin-bottom: 12px;">🎨</div>
+          <h4 style="margin-bottom: 8px;">Apply Professional Styles</h4>
+          <p style="color: var(--muted); font-size: 0.9rem;">20 carefully crafted design styles. Glassmorphism, corporate, brutalist — pick what fits.</p>
+        </div>
+        <div style="padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px;">
+          <div style="font-size: 2rem; margin-bottom: 12px;">📤</div>
+          <h4 style="margin-bottom: 8px;">Export Anywhere</h4>
+          <p style="color: var(--muted); font-size: 0.9rem;">Generate self-contained HTML or PDF. Host on GitHub Pages, email to clients, or archive for later.</p>
+        </div>
       </div>
       
       <div class="stats-row">
@@ -1059,23 +1195,33 @@ node present create "My Talk"
   <!-- CTA -->
   <section class="cta">
     <div class="container">
-      <h2>Ready to present better?</h2>
-      <p>Join the developers who stopped fighting with slide software.</p>
-      <a href="https://github.com/molhamfetnah/opencode-presentations-skill" class="btn btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        View on GitHub
-      </a>
+      <h2>Ready to Present Better?</h2>
+      <p>Join the developers and teams who've stopped fighting with slide software. Create presentations that look professional, version control beautifully, and work exactly where you need them.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
+        <a href="https://github.com/molhamfetnah/opencode-presentations-skill" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <a href="#quickstart" class="btn btn-outline">Get Started</a>
+      </div>
     </div>
   </section>
   
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>Built with care for the OpenCode community. MIT License.</p>
-      <div>
-        <a href="https://github.com/molhamfetnah/opencode-presentations-skill">GitHub</a>
-        <span style="margin: 0 12px; color: var(--border);">|</span>
-        <a href="https://github.com/molhamfetnah/opencode-presentations-skill/issues">Issues</a>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+        <div>
+          <p style="margin-bottom: 4px;">Built with care for the OpenCode community.</p>
+          <p style="color: var(--muted); font-size: 0.85rem;">MIT License — Free to use, modify, and distribute.</p>
+        </div>
+        <div>
+          <a href="https://github.com/molhamfetnah/opencode-presentations-skill">GitHub</a>
+          <span style="margin: 0 12px; color: var(--border);">|</span>
+          <a href="https://github.com/molhamfetnah/opencode-presentations-skill/issues">Report an Issue</a>
+          <span style="margin: 0 12px; color: var(--border);">|</span>
+          <a href="https://github.com/molhamfetnah/opencode-presentations-skill/discussions">Discussions</a>
+        </div>
       </div>
     </div>
   </footer>
